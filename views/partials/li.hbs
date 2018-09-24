@@ -1,0 +1,8 @@
+<li class="item" data-index="{{index}}" data-mid="{{_id}}">
+    {{#if url}}<a href="{{url}}">{{/if}}{{title}}{{#if url}}</a>{{/if}}
+    <div class="deets">
+        {{~#if host~}}{{host}}&nbsp;|&nbsp;{{~/if~}}
+        {{~#if created_by.username~}}by {{created_by.username}}&nbsp;|&nbsp;{{~/if~}}
+        {{~date~}}
+    </div>
+</li>

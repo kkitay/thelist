@@ -1,0 +1,36 @@
+<script type="text/javascript" src="/javascripts/main.js"></script>
+<h1>{{title}}</h1>
+<p>{{description}}</p>
+<ul id="thelist">
+    {{#items}}
+        {{>li}}
+    {{/items}}
+</ul>
+<div class="actions">
+    <div class="listaction" id="section-authed">
+        <h4>Hello, name. You may add one thing to the list today</h4>
+        <form id="new-form" action="#">
+            <input id="new-title" placeholder="title" />
+            <input id="new-url" placeholder="optional url" />
+            <input id="new-submit" type="submit" value="put it in the list" onclick="addItem(this);return false;" />
+        </form>
+        <h4>OR you may remove one thing from the list</h4>
+        <form id="remove-form" action="#">
+            <input id="remove-index" size="3" placeholder="#" />
+            <input id="remove-submit" type="submit" value="get it off the list" onclick="removeItem(this);return false;" />
+        </form>
+        <button class="logout" onclick="logout();">log out</button>
+    </div>
+    <div class="listaction" id="section-unauthed">
+        <h4>You must authenticate to participate</h4>
+        <form id="auth" action="#">
+            <input id="username" placeholder="username" />
+            <input type="password" id="password" placeholder="password" />
+            <input type="submit" onclick="auth('login');return false;" value="Login" />
+            <input type="submit" onclick="auth('signup');return false;" value="Sign Up" />
+        </form>
+    </div>
+</div>
+<div class="credit">
+    <a href="https://twitter.com/kkitay">made by @kkitay</a>
+</div>
