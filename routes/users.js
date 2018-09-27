@@ -52,7 +52,10 @@ async function(req, res) {
           }
         ]
       }).countDocuments();
-      res.status(200).json({docs: recentDocs});
+      res.status(200).json({
+        username: req.user.username,
+        docs: recentDocs
+      });
     }catch(e) {
       console.log(e);
       res.status(500).json({error: e});

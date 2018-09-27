@@ -48,7 +48,7 @@ input, button {
   }
 
 .credit {
-  position: absolute;
+  position: fixed;
   bottom: 5px;
   right: 5px;
   color: #999;

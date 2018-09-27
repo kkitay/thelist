@@ -1,25 +1,30 @@
 var authToken = null;
 
+function showUserAction(token) {
+  let req = new XMLHttpRequest;
+  req.open('POST', '/api/users/recent', true);
+  req.setRequestHeader('Authorization', `Bearer ${token}`);
+  req.onload = function () {
+    let data = JSON.parse(req.responseText);
+    if(data.docs > 0) {
+      let doc = document.getElementById('section-authed');
+      doc.innerHTML = `Thanks for participating today.`;
+      doc.style.left = "0";
+      doc.style.opacity = "1";
+    } else {
+      let doc = document.getElementById('section-authed');
+      document.getElementById('name').innerHTML = `, ${data.username}`;
+      doc.style.left = "0";
+      doc.style.opacity = "1";
+    }
+  }
+  req.send();
+}
+
 window.onload = function () {
   authToken = localStorage.getItem('token');
   if(authToken) {
-    let req = new XMLHttpRequest;
-    req.open('POST', '/api/users/recent', true);
-    req.setRequestHeader('Authorization', `Bearer ${authToken}`);
-    req.onload = function () {
-      let data = JSON.parse(req.responseText);
-      if(data.docs > 0) {
-        let doc = document.getElementById('section-authed');
-        doc.innerHTML = `Thanks for participating today.`;
-        doc.style.left = "0";
-        doc.style.opacity = "1";
-      } else {
-        let doc = document.getElementById('section-authed');
-        doc.style.left = "0";
-        doc.style.opacity = "1";
-      }
-    }
-    req.send();
+    showUserAction(authToken);
   } else {
     let doc = document.getElementById('section-unauthed');
     doc.style.left = "0";
@@ -137,7 +142,10 @@ function auth(method, dataOnly = false) {
     if(data.token && dataOnly === false) {
       // successful signup or create
       localStorage.setItem('token', data.token);
-      location.reload();
+      document.getElementById('section-unauthed').style.display = 'none';
+      showUserAction(data.token);
+      authToken = data.token;
+      //location.reload();
     } else if(data.token && dataOnly === true) {
       return data;
     } else {
