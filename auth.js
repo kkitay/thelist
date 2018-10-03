@@ -1,7 +1,6 @@
 const path = require('path')
 const passportJWT = require('passport-jwt');
 const users = require(path.join(__dirname, 'models/users.js'));
-const util = require('util');
 
 // passport auth strategy
 const authSecret = require(path.join(__dirname, 'config.js')).authSecret;

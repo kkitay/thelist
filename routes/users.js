@@ -14,7 +14,9 @@ async function login(res, user, pass) {
 
   if(userDoc && userDoc.validPassword(pass)) {
     // create payload and encode token
-    let payload = { id: userDoc.id };
+    let payload = {
+      id: userDoc.id
+    };
     let token = jwt.sign(payload, authSecret);
     
     // respond with token
